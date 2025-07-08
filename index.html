@@ -7,27 +7,66 @@
     body {
       font-family: Arial, sans-serif;
       text-align: center;
-      padding: 50px;
+      padding: 0;
+      margin: 0;
       background: #f0f0f0;
     }
+
+    /* Splash screen styling */
+    #splash-screen {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: #007BFF;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    #splash-screen h1 {
+      font-size: 2.5em;
+      margin-bottom: 20px;
+    }
+
+    #enter-btn {
+      background: white;
+      color: #007BFF;
+      border: none;
+      padding: 12px 24px;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    #enter-btn:hover {
+      background-color: #e6e6e6;
+    }
+
+    /* Quote box */
     #quote-box {
+      display: none; /* Hidden until splash ends */
       background: white;
       border-radius: 10px;
       padding: 30px;
       box-shadow: 0 5px 15px rgba(0,0,0,0.1);
       max-width: 600px;
-      margin: auto;
+      margin: 80px auto;
     }
+
     #quote-text {
       font-size: 24px;
       margin-bottom: 20px;
     }
+
     #quote-img {
       max-width: 100%;
       height: auto;
       margin-bottom: 20px;
       border-radius: 10px;
     }
+
     #new-quote-btn {
       padding: 10px 20px;
       font-size: 16px;
@@ -37,12 +76,21 @@
       color: white;
       cursor: pointer;
     }
+
     #new-quote-btn:hover {
       background-color: #0056b3;
     }
   </style>
 </head>
 <body>
+
+  <!-- Splash Screen -->
+  <div id="splash-screen">
+    <h1>Welcome to the Infinite Quote Machine</h1>
+    <button id="enter-btn">Enter</button>
+  </div>
+
+  <!-- Quote Generator -->
   <div id="quote-box">
     <div id="quote-text">Loading...</div>
     <img id="quote-img" src="" alt="Quote image">
@@ -75,8 +123,13 @@
 
     document.getElementById('new-quote-btn').addEventListener('click', displayRandomQuote);
 
+    // Show main content when user clicks "Enter"
+    document.getElementById('enter-btn').addEventListener('click', () => {
+      document.getElementById('splash-screen').style.display = 'none';
+      document.getElementById('quote-box').style.display = 'block';
+    });
+
     loadCSV();
   </script>
 </body>
 </html>
-
